@@ -1,0 +1,20 @@
+body {
+	background-image: radial-gradient(circle, #131646, #0b0e35);
+	margin: 0;
+}
+
+
+.container {
+	width:100%;
+	height:100vh;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+#logo {
+	background-image: url(../images/logo_larger.png);
+	width: 339px;
+	height: 356px;
+
+}
