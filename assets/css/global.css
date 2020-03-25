@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i&display=swap');
+
+
+a:link {
+	text-decoration:none;
+	color: inherit;
+}
+a:visited {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:none;
+color: inherit;
+}
+
+body {
+	background-color: #0b0e35;
+	font-family: 'Poppins'!important;
+}
+
+.content {
+	width:100%;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+#left-side {
+	background-color: #131646;
+	width: 100%;
+	height: 470px;
+	border-radius: 10px;
+	color: white;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0px 5px 30px 2px rgba(0, 0, 0, 0.3);	
+}
+
+#logo {
+	background-image: url(../images/logo.png);
+	width: 188px;
+	height: 189px;
+	position: absolute;
+	left: calc(50% - 94.5px);
+	top: -90px;
+	z-index: 1;
+}
+
+#left-side #square {
+	background-color: #e22e77;
+	width: 500px;
+	min-height: 300px;
+	transform: rotate(8deg);
+	margin-top: -20px;
+	margin-left: -20px;
+	position: relative;
+}
+
+#left-side #square .title {
+	display: flex;
+	flex-direction: column;
+	max-width: 330px;
+	transform: rotate(-8deg);
+	text-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+	padding: 140px 0px 0px 50px;
+	text-align: justify;
+}
+
+#left-side #square .title h1 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+#left-side #square .title p {
+	font-size: 14px;
+}
+
+#left-side #player {
+	position: absolute;
+	bottom: -15px;
+	left: 15px;
+	display: flex;
+	align-items:center;
+}
+
+#left-side #player .plataform {
+	background-image: url(../images/plataform.png);
+	background-repeat: no-repeat;
+	width: 110px;
+	height: 61px;
+	position: relative;
+}
+
+#left-side #player .plataform .avatar {
+	width: 128px;
+	height: 220px;
+	position: absolute;
+	top: -185px;
+	left: -20px;
+}
+
+#left-side #player .text {
+	max-width: 200px;
+	margin-top: -180px;
+}
+
+#left-side #player .text h1 {
+	font-size: 16px;
+	color: #e22e77;
+	font-weight: bold;
+}
+
+#left-side #player .text h2 {
+	font-size: 13px;
+}
+
+#left-side #player .text h2 span {
+	font-size: 11px;
+}
+
+#left-side #player .text .buttons {
+	display: flex;
+}
+
+#left-side #player .text .buttons button {
+	background: transparent;
+	border: solid 2px white;
+	height: 35px;
+	width: 35px;
+	border-radius: 30px;
+	color: white;
+	text-align: center;
+	padding: 0;
+	outline: none;
+	margin: 5px 10px 0 0;
+	transition: all .2s;
+}
+
+#left-side #player .text .buttons button.play::before {
+	font-family: "Font Awesome 5 Free"; 
+	font-weight: 900; 
+	content: "\f04b";
+}
+
+#left-side #player .text .buttons button.play.pause::before {
+	content: "\f04c";
+}
+
+#left-side #player .text .buttons button:hover {
+	border-color: #e22e77;
+	color: #e22e77;
+}
+
+#left-side #player .text .buttons button.listeners {
+	width: 100px;
+}
+
+#chat {
+	background-color: #131646;
+	width: 100%;
+	height: 470px;
+	border-radius: 10px;
+	color: white;
+	padding: 40px 50px;
+	box-shadow: 0px 5px 30px 2px rgba(0, 0, 0, 0.3);
+	overflow: hidden;	
+}
+
+#chat .title h1 {
+	font-size: 28px;
+	color: #e22e77;
+	font-weight: bold;
+	text-shadow: 0px 2px 4px rgba(0,0,0,0.4);
+}
+
+#chat .title p {
+	font-size: 14px;
+	color: white;
+}
+
+#chat #messages ul {
+	height: 240px;
+	margin: 0;
+	padding: 0 10px 0 0;
+	list-style: none;
+	overflow-y: scroll;
+}
+
+#chat #messages ul::-webkit-scrollbar {
+    width: 10px;
+}
+
+#chat #messages ul::-webkit-scrollbar-track {
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 10px;
+}
+
+#chat #messages ul::-webkit-scrollbar-thumb {
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 10px;
+}
+
+#chat #messages ul li {
+	background-color: #3d417d;
+	padding: 20px 25px;
+	border-radius: 30px;
+	color: white;
+	display: flex;
+  	align-items: stretch;
+  	margin-bottom: 10px;
+}
+
+#chat #messages ul li.mine {
+	background-color: #e22e77;
+	flex-direction: row-reverse;
+	text-align: right;
+}
+
+#chat #messages ul li.mine .user {
+	padding: 0 0 0 10px;	
+}
+
+#chat #messages ul li .user {
+	padding: 0 10px 0 0;
+}
+
+#chat #messages ul li .autor {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#chat #messages ul li .said {
+	font-size: 11px;
+}
+
+#chat #messages ul li .text {
+	font-size: 13px;
+}
+
+#chat #inputs {
+	margin-top: 20px;
+}
+#chat #inputs input, button {
+	width: 100%;
+	height: 40px;
+	color: #131646;
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+	border-radius: 20px;
+	font-size: 12px;
+}
+
+#chat #inputs button {
+	width: 100%;
+	background-color: #e22e77;
+	color: white;
+	font-weight: bold;
+	transition: all 0.2s;
+	outline: none;
+}
+
+#chat #inputs button:active {
+	background-color: white;
+	color: #e22e77;
+}
+
+.development {
+	margin-top: 20px;
+	text-align: center;
+	color: #3d417d;
+	font-size: 12px;
+	text-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
+.development a {
+	color: #3d417d;
+}
