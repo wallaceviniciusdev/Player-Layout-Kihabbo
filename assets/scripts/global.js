@@ -49,7 +49,7 @@ function sendMessage(){
 
 function loadUtils(type, extradata) {
 	return $.ajax({
-		url: "http://api.mateusmelo.com/" + type,
+		url: "https://api.mateusmelo.com/" + type,
 		type: "GET",
 		data: extradata
 	});
