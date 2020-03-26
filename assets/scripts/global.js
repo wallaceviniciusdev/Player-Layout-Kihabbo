@@ -63,6 +63,7 @@ function divEffects(){
 	var title_square = $("#chat #messages");
 	var inputs = $("#chat #inputs");
 	var develp = $(".development");
+	var overlay = $(".overlay");
 
 	logo.hide();
 	player.hide();
@@ -73,6 +74,7 @@ function divEffects(){
 
 	$("#left-side").addClass(" animated bounceInDown");
 	chat.addClass("animated bounceInUp");
+	overlay.addClass("animated bounceInUp")
 
 	setTimeout(
 		function(){
