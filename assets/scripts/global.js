@@ -120,7 +120,7 @@ $(document).ready(function() {
 		refresh: function() {
 			$("[data-status]").not("[data-status=imagem]").text("...");
 			$("[data-status=imagem]").css({opacity: "0.5"});
-			loadUtils("status.php", {url: $("[data-player]").data("ip"), shoutcast: $("[data-player]").data("shoutcast")}).done(function(data) {
+			loadUtils("status.php", {url: $("[data-player]").data("ip"), shoutcast: $("[data-player]").data("shoutcast"), security: $("[data-player]").data("security")}).done(function(data) {
 				$.each(data, function(key, value) {
 					$("[data-status="+key+"]").text(value);
 					if (key == "dj") $("[data-status=imagem]").css("backgroundImage", "url(https://www.habbo.com.br/habbo-imaging/avatarimage?img_format=gif&user="+value+"&action=&direction=2&head_direction=3&img_format=png&gesture=sml&headonly=0&size=l)").css({opacity: "1"});
@@ -134,7 +134,9 @@ $(document).ready(function() {
 		play: function() {
 			var audio = $("<audio>");
 			audio.attr("id", "haudio");
-			audio.attr("src", "http://" + $("[data-player]").data("ip") + "/;stream.aacp");
+			var https = "http";
+			if ($("[data-player]").data("security") == 1) https = "https";ß
+			audio.attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
 			audio.attr("type", "audio/mp4");
 			$("#hplayer", "body").html(audio);
 			var hplayer = document.getElementById("haudio");
