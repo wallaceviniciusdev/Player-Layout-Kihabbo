@@ -98,12 +98,34 @@
 						</div>
 
 						<div id="inputs">
-							<div class="row">
-								<div class="col-md-3"><input type="text" placeholder="Seu nick" name=""></div>
-								<div class="col-md-5"><input type="text" placeholder="Sua mensagem" name=""></div>
-								<div class="col-md-2"><button type="submit">Enviar</button></div>
-								<div class="col-md-2"><button type=""><i class="fas fa-heart"></i></button></div>
-							</div>
+								<form id="misson_check" action="misson_check" method="get">
+									<div class="row">
+										<div class="col-md-3">
+											<input type="text" placeholder="Seu nick" name=""></div>
+										<div class="col-md-6">
+											<input type="text" placeholder="Digite #Kihabbo2020 na sua missão" name="" disabled>
+										</div>
+										<div class="col-md-3">
+											<button type="submit">Confirmar</button>
+										</div>
+									</div>
+								</form>
+
+								<form id="send_message" action="send_message" method="post">
+									<div class="row">
+										<div class="col-md-3">
+											<input type="text" placeholder="Seu nick" name="" required></div>
+										<div class="col-md-5">
+											<input type="text" placeholder="Sua mensagem" name="">
+										</div>
+										<div class="col-md-2">
+											<button type="submit">Enviar</button>
+										</div>
+										<div class="col-md-2">
+											<button type=""><i class="fas fa-heart"></i></button>
+										</div>
+									</div>
+								</form>
 						</div>
 					</div>
 				</div>
