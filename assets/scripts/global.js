@@ -125,6 +125,7 @@ $(document).ready(function() {
 					$("[data-status="+key+"]").text(value);
 					if (key == "dj") $("[data-status=imagem]").css("backgroundImage", "url(https://www.habbo.com.br/habbo-imaging/avatarimage?img_format=gif&user="+value+"&action=&direction=2&head_direction=3&img_format=png&gesture=sml&headonly=0&size=l)").css({opacity: "1"});
 				});
+				if (data.dj == "KiHabboVirus") $("[data-status=programa]").text("Quarentena KiHabbo");
 			});
 		},
 		pause: function() {
