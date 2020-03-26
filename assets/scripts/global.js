@@ -19,7 +19,7 @@ function missionCheck(){
 		});
 
 		request.fail(function(msg){
-
+			$(this).addClass("animated shake");
 		})
 
 		event.preventDefault();
@@ -40,7 +40,7 @@ function sendMessage(){
 		});
 
 		request.fail(function(msg){
-
+			$(this).addClass("animated shake");
 		})
 
 		event.preventDefault();
