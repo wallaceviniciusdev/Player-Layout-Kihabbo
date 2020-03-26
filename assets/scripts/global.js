@@ -47,11 +47,11 @@ function sendMessage(){
 	});
 }
 
-function playButton(){
-	var play = $(".play");
-
-	play.click(function(){
-		$(this).toggleClass("pause");
+function loadUtils(type, extradata) {
+	return $.ajax({
+		url: "http://api.mateusmelo.com/" + type,
+		type: "GET",
+		data: extradata
 	});
 }
 
@@ -111,7 +111,64 @@ function divEffects(){
 		}, 300);
 }
 
-missionCheck();
-sendMessage();
-playButton();
-divEffects();
+$(document).ready(function() {
+	var clickedFirst = 0;
+	missionCheck();
+	sendMessage();
+	divEffects();
+	var player = {
+		refresh: function() {
+			$("[data-status]").not("[data-status=imagem]").text("...");
+			$("[data-status=imagem]").css({opacity: "0.5"});
+			loadUtils("status.php", {url: $("[data-player]").data("ip"), shoutcast: $("[data-player]").data("shoutcast")}).done(function(data) {
+				$.each(data, function(key, value) {
+					$("[data-status="+key+"]").text(value);
+					if (key == "dj") $("[data-status=imagem]").css("backgroundImage", "url(https://www.habbo.com.br/habbo-imaging/avatarimage?img_format=gif&user="+value+"&action=&direction=2&head_direction=3&img_format=png&gesture=sml&headonly=0&size=l)").css({opacity: "1"});
+				});
+			});
+		},
+		pause: function() {
+			$("#hplayer", "body").html("");
+			player.refresh();
+		},
+		play: function() {
+			var audio = $("<audio>");
+			audio.attr("id", "haudio");
+			audio.attr("src", "http://" + $("[data-player]").data("ip") + "/;stream.aacp");
+			audio.attr("type", "audio/mp4");
+			$("#hplayer", "body").html(audio);
+			var hplayer = document.getElementById("haudio");
+			hplayer.volume = 1;
+			hplayer.play();
+			$("body").off("click", "[data-status]:not([data-status=imagem])").on("click", "[data-status]:not([data-status=imagem])", function() {
+				player.refresh();
+			});
+			player.refresh();
+		}
+	};
+	$("body").off("click", "[data-player]").on("click", "[data-player]", function() {
+		if (clickedFirst != 0) {
+			switch($(this).data("player")) {
+				case "pause":
+					player.pause();
+					$("[data-player]", "body").data("player", "play").removeClass("pause");
+					break;
+				case "play":
+					player.play();
+					$("[data-player]", "body").data("player", "pause").addClass("pause");
+					break;
+			}
+		}
+	});
+	player.refresh();
+	var playerInterval = setInterval(function() {
+		player.refresh();
+	}, 60000);
+	$("body").on("click", function() {
+		if (clickedFirst == 0) {
+			clickedFirst = 1;
+			player.play();
+			$("[data-player]", "body").data("player", "pause").addClass("pause");
+		}
+	});
+});
