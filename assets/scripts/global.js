@@ -135,7 +135,7 @@ $(document).ready(function() {
 			var audio = $("<audio>");
 			audio.attr("id", "haudio");
 			var https = "http";
-			if ($("[data-player]").data("security") == 1) https = "https";ß
+			if ($("[data-player]").data("security") == 1) https = "https";
 			audio.attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
 			audio.attr("type", "audio/mp4");
 			$("#hplayer", "body").html(audio);
