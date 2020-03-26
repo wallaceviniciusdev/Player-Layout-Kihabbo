@@ -4,8 +4,11 @@
     <link rel="shortcut icon" href="./assets/images/logo.png" />
 </head>
 <body>
-<audio id="stream" controls preload="none" autoplay style="width: 240px;">
-    <source src="https://sonic.dedicado.stream:7034/;" type="audio/mpeg">
+<audio controls="controls" id="stream" autoplay="" preload="none" style="height:35px; width:240px" src="https://sonic.dedicado.stream:7034/;type=mp3">
+    <source id="source_mpeg" src="https://sonic.dedicado.stream:7034/;type=mp3" type="audio/mpeg">
+    <source id="source_ogg" src="https://sonic.dedicado.stream:7034/;type=ogg" type="audio/ogg">
+    <source id="source_aacplus" src="https://sonic.dedicado.stream:7034/;type=aacplus" type="audio/aacplus">
+    <source id="source_wav" src="https://sonic.dedicado.stream:7034/;type=wav" type="audio/wav">
 </audio>
 <script>
     var audio = document.getElementById('stream');
