@@ -303,3 +303,13 @@ body {
 .development a {
 	color: #3d417d;
 }
+
+/* Bootstrap */
+.col-md-3 {
+	flex-shrink: 1;
+	transition: all 250ms ease;
+}
+.col-md-12 {
+	flex-grow: 1;
+	transition: all 250ms ease;
+}
