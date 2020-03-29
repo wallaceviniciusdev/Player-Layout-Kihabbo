@@ -53,6 +53,9 @@ $(document).ready(function () {
         token: "",
         ts: 0
     };
+
+    var loggedIn = false;
+
     var cooldown = false;
 
     chat.off("connect").on("connect", function() {
@@ -117,6 +120,7 @@ $(document).ready(function () {
                         session.username = check.username;
                         localStorage.setItem("session", JSON.stringify(session));
                         chat.emit("handshake", JSON.parse(localStorage.getItem("session")));
+                        loggedIn = true;
                     } else {
                         if (!check.user) $("input[name=username]").addClass("animated shake");
                         if (!check.mission) $("#missionform").addClass("animated shake");
@@ -138,6 +142,7 @@ $(document).ready(function () {
             session = JSON.parse(localStorage.getItem("session"));
             if ("username" in session && "token" in session && "ts" in session) {
                 chat.emit("handshake", session);
+                loggedIn = true;
             } else {
                 logout();
             }
@@ -203,31 +208,36 @@ $(document).ready(function () {
             msgs.scrollTop(msgs[0].scrollHeight);
         }
         chat.off("chat").on("chat", function(data) {
-            enableForm("#send_message");
             $("#messages").find("ul").empty();
             $.each(data.history, function(k, msg) {
                addMessage(msg);
             });
-            if (localStorage.hasOwnProperty("mutedUntil")) {
-                var mutedUntil = parseInt(localStorage.getItem("mutedUntil"));
-                var date = new Date();
-                date = Math.floor(date.getTime() / 1000);
-                if (mutedUntil > date) {
-                    muted(mutedUntil);
-                    isMuted = true;
-                } else {
-                    isMuted = false;
-                    localStorage.removeItem("mutedUntil")
-                }
-            }
-            $("#send_message").off("submit").on("submit", function(e) {
-                e.preventDefault();
-                if (isMuted) return false;
-                var input = $(this).find("input[name=msg]");
-                addMessage({username: session.username, message: input.val()});
-                chat.emit("message", input.val());
-                input.val("");
+            chat.off("message").on("message", function(msg) {
+                addMessage(msg);
             });
+            if (loggedIn) {
+                enableForm("#send_message");
+                if (localStorage.hasOwnProperty("mutedUntil")) {
+                    var mutedUntil = parseInt(localStorage.getItem("mutedUntil"));
+                    var date = new Date();
+                    date = Math.floor(date.getTime() / 1000);
+                    if (mutedUntil > date) {
+                        muted(mutedUntil);
+                        isMuted = true;
+                    } else {
+                        isMuted = false;
+                        localStorage.removeItem("mutedUntil")
+                    }
+                }
+                $("#send_message").off("submit").on("submit", function (e) {
+                    e.preventDefault();
+                    if (isMuted) return false;
+                    var input = $(this).find("input[name=msg]");
+                    addMessage({username: session.username, message: input.val()});
+                    chat.emit("message", input.val());
+                    input.val("");
+                });
+            }
         });
         chat.off("muted").on("muted", function(until) {
             var date = new Date();
