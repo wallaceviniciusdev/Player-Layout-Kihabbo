@@ -216,7 +216,7 @@ $(document).ready(function () {
                 addMessage(msg);
             });
             if (loggedIn) {
-                enableForm("#send_message");
+                if ($("#send_message").is(":hidden")) enableForm("#send_message");
                 if (localStorage.hasOwnProperty("mutedUntil")) {
                     var mutedUntil = parseInt(localStorage.getItem("mutedUntil"));
                     var date = new Date();
