@@ -205,6 +205,57 @@ body {
 	color: white;
 }
 
+#chat .online {
+	background-color: #e22e77;
+	text-align: center;
+	padding: 15px 20px;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: bold;
+	cursor: pointer; 
+}
+
+#chat .online i.on {
+	color: #4cd137;
+	padding-right: 10px;
+	font-size: 12px;
+}
+
+#chat .online i.off {
+	color: #EEE;
+	padding-right: 10px;
+	font-size: 12px;
+}
+
+#usersOnline .user {
+	background-color: #EEE;
+	border-radius: 10px;
+	text-align: center;
+	padding: 10px 15px 10px 15px;
+	margin-bottom: 10px;
+	transition: all 0.2s;
+}
+
+#usersOnline .user:hover {
+	background-color: #131646;
+}
+
+#usersOnline .user:hover h1 {
+	color: white;
+}
+
+#usersOnline .user h1 {
+	font-size: 13px;
+	color: #0b0e35;
+	font-weight: bold;
+	transition: all 0.2s;
+
+}
+
+#usersOnline .col-md-4 {
+	padding-left: 0;
+}
+
 #chat #messages ul {
 	height: 280px;
 	margin: 0;
@@ -276,6 +327,7 @@ body {
 #chat #inputs {
 	margin-top: 20px;
 }
+
 #chat #inputs input, button {
 	width: 100%;
 	height: 40px;
@@ -321,4 +373,39 @@ body {
 .col-md-12 {
 	flex-grow: 1;
 	transition: all 250ms ease;
+}
+
+.modal-content {
+	border-radius: 12px;
+}
+
+.modal-header {
+	background-color: #e22e77;
+	border-radius: 10px 10px 0 0;
+}
+
+.modal-header .modal-title {
+	color: white;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.modal-header .modal-title i {
+	padding-right: 10px;
+}
+
+.modal-body {
+	padding-left: 30px;
+}
+
+.modal-footer button {
+	background-color: #131646;
+	border-radius: 10px;
+	border: none;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.modal-footer button:hover, button:focus {
+	background-color: #e22e77;
 }

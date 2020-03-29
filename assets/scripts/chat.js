@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+    function blinkOnline(){
+        $("#chat .online i.on").fadeOut(300);
+        $("#chat .online i.on").fadeIn(300);
+    }
+
+    setInterval(blinkOnline, 1000);
+
     var inputs = $("#chat #inputs");
     var overlay = $(".overlay");
     $("#chat").hide();
