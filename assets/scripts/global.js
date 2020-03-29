@@ -1,51 +1,51 @@
-function missionCheck(){
-	var formMission = $("#misson_check"),
-		formMessage = $("#send_message");
-
-	formMessage.hide();
-
-	formMission.submit(function(event){
-		var request = $.ajax({
-			method: "GET",
-			url: "missionCheckScript",
-			data: {}
-		});
-
-		request.done(function(msg){
-			$(this).addClass("animated bounceOutUp"); 
-			$(this).fadeOut(300);
-			formMessage.fadeIn(300);
-			formMessage.addClass("animated bounceInUp");
-		});
-
-		request.fail(function(msg){
-			$(this).addClass("animated shake");
-		})
-
-		event.preventDefault();
-	});
-}
-
-function sendMessage(){
-	var formMessage = $("#send_message");
-
-	formMessage.submit(function(event){
-		var request = $.ajax({
-			method: "POST",
-			url: "sendMessageScript",
-			data: {}
-		});
-
-		request.done(function(msg){
-		});
-
-		request.fail(function(msg){
-			$(this).addClass("animated shake");
-		})
-
-		event.preventDefault();
-	});
-}
+// function missionCheck(){
+// 	var formMission = $("#misson_check"),
+// 		formMessage = $("#send_message");
+//
+// 	formMessage.hide();
+//
+// 	formMission.submit(function(event){
+// 		var request = $.ajax({
+// 			method: "GET",
+// 			url: "missionCheckScript",
+// 			data: {}
+// 		});
+//
+// 		request.done(function(msg){
+// 			$(this).addClass("animated bounceOutUp");
+// 			$(this).fadeOut(300);
+// 			formMessage.fadeIn(300);
+// 			formMessage.addClass("animated bounceInUp");
+// 		});
+//
+// 		request.fail(function(msg){
+// 			$(this).addClass("animated shake");
+// 		})
+//
+// 		event.preventDefault();
+// 	});
+// }
+//
+// function sendMessage(){
+// 	var formMessage = $("#send_message");
+//
+// 	formMessage.submit(function(event){
+// 		var request = $.ajax({
+// 			method: "POST",
+// 			url: "sendMessageScript",
+// 			data: {}
+// 		});
+//
+// 		request.done(function(msg){
+// 		});
+//
+// 		request.fail(function(msg){
+// 			$(this).addClass("animated shake");
+// 		})
+//
+// 		event.preventDefault();
+// 	});
+// }
 
 function loadUtils(type, extradata) {
 	return $.ajax({
@@ -58,34 +58,22 @@ function loadUtils(type, extradata) {
 function divEffects(){
 	var player = $("#player");
 	var logo = $("#logo");
-	var chat = $("#chat");
 	var chat_title = $("#chat .title");
 	var title_square = $("#chat #messages");
-	var inputs = $("#chat #inputs");
 	var develp = $(".development");
-	var overlay = $(".overlay");
 
 	logo.hide();
 	player.hide();
 	chat_title.hide();
 	title_square.hide();
-	inputs.hide();
 	develp.hide();
 
 	$("#left-side").addClass(" animated bounceInDown");
-	chat.addClass("animated bounceInUp");
-	overlay.addClass("animated bounceInUp")
 
 	setTimeout(
 		function(){
 			develp.fadeIn(1000);
 			develp.addClass(" animated heartBeat");
-		}, 300);
-
-	setTimeout(
-		function(){
-			inputs.fadeIn(100);
-			inputs.addClass(" animated bounceInDown");
 		}, 300);
 
 	setTimeout(
@@ -115,9 +103,10 @@ function divEffects(){
 
 $(document).ready(function() {
 	var clickedFirst = 0;
-	missionCheck();
-	sendMessage();
+	//missionCheck();
+	//sendMessage();
 	divEffects();
+	var isLoading = false;
 	var player = {
 		refresh: function() {
 			$("[data-status]").not("[data-status=imagem]").text("...");
@@ -133,6 +122,7 @@ $(document).ready(function() {
 		pause: function() {
 			$("#hplayer", "body").html("");
 			player.refresh();
+			$("[data-player]", "body").data("player", "play").removeClass("pause");
 		},
 		play: function() {
 			var audio = $("<audio>");
@@ -140,11 +130,19 @@ $(document).ready(function() {
 			var https = "http";
 			if ($("[data-player]").data("security") == 1) https = "https";
 			audio.attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
-			audio.attr("type", "audio/mp4");
+			audio.attr("type", "audio/mp3");
 			$("#hplayer", "body").html(audio);
 			var hplayer = document.getElementById("haudio");
 			hplayer.volume = 1;
-			hplayer.play();
+			var playPromise = hplayer.play();
+			if (playPromise !== undefined) {
+				playPromise.then(_ => {
+					$("[data-player]", "body").data("player", "pause").addClass("pause");
+					isLoading = false;
+				}).catch(error => {
+					isLoading = false;
+				});
+			}
 			$("body").off("click", "[data-status]:not([data-status=imagem])").on("click", "[data-status]:not([data-status=imagem])", function() {
 				player.refresh();
 			});
@@ -152,15 +150,13 @@ $(document).ready(function() {
 		}
 	};
 	$("body").off("click", "[data-player]").on("click", "[data-player]", function() {
-		if (clickedFirst != 0) {
+		if (clickedFirst != 0 && !isLoading) {
 			switch($(this).data("player")) {
 				case "pause":
 					player.pause();
-					$("[data-player]", "body").data("player", "play").removeClass("pause");
 					break;
 				case "play":
 					player.play();
-					$("[data-player]", "body").data("player", "pause").addClass("pause");
 					break;
 			}
 		}
@@ -169,9 +165,43 @@ $(document).ready(function() {
 	var playerInterval = setInterval(function() {
 		player.refresh();
 	}, 60000);
+	var isPlaying = function () {
+		var hplayer = document.getElementById("haudio");
+		return hplayer
+			&& hplayer.currentTime > 0
+			&& !hplayer.paused
+			&& !hplayer.ended
+			&& hplayer.readyState > 2;
+	};
+	setInterval(function() {
+		var check = isPlaying();
+		if (check !== null) {
+			if(!isPlaying()) {
+				if (isLoading) return false;
+				isLoading = true;
+				var hplayer = document.getElementById("haudio");
+				var https = "http";
+				if ($("[data-player]").data("security") == 1) https = "https";
+				$(hplayer).attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
+				hplayer.load();
+				setTimeout(function() {
+					var playPromise = hplayer.play();
+					if (playPromise !== undefined) {
+						playPromise.then(_ => {
+							$("[data-player]", "body").data("player", "pause").addClass("pause");
+							isLoading = false;
+						}).catch(error => {
+							isLoading = false;
+						});
+					}
+				}, 1000);
+			}
+		}
+	}, 1000);
 	$("body").on("click", function() {
 		if (clickedFirst == 0) {
 			clickedFirst = 1;
+			isLoading = true;
 			player.play();
 			$("[data-player]", "body").data("player", "pause").addClass("pause");
 		}
