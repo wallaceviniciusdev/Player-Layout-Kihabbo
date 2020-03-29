@@ -48,7 +48,11 @@ $(document).ready(function () {
         reconnectionDelay: 10000
     });
 
-    var session;
+    var session = {
+        username: "",
+        token: "",
+        ts: 0
+    };
     var cooldown = false;
 
     chat.off("connect").on("connect", function() {
@@ -143,9 +147,95 @@ $(document).ready(function () {
         chat.off("logout").on("logout", function() {
             logout();
         });
+        var muteInterval;
+        var isMuted = false;
+        function muted(until) {
+            if (isMuted) return;
+            var date = new Date();
+            date = Math.floor(date.getTime() / 1000);
+            until = until - date;
+            if (until > 0) {
+                isMuted = true;
+                $("#send_message").find("button").css({opacity: 0.8, cursor: "initial"});
+                muteInterval = setInterval(function() {
+                    until--;
+                    var plural = "s";
+                    if (until == 1) plural = "";
+                    $("#send_message").find("input[name=msg]").val("");
+                    $("#send_message").find("input[name=msg]").attr("disabled", 1).attr("placeholder", "Flood detectado. Volte a falar em "+until+" segundo"+plural+".");
+                    if (until == 0) {
+                        isMuted = false;
+                        $("#send_message").find("button").css({opacity: 1, cursor: "pointer"});
+                        $("#send_message").find("input[name=msg]").removeAttr("disabled").attr("placeholder", "Sua mensagem");
+                        clearInterval(muteInterval);
+                    }
+                }, 1000);
+            } else {
+                isMuted = false;
+                $("#send_message").find("button").css({opacity: 1, cursor: "pointer"});
+                $("#send_message").find("input[name=msg]").removeAttr("disabled").attr("placeholder", "Sua mensagem");
+            }
+        }
+        function addMessage(msg) {
+            var msgs = $("#messages").find("ul");
+            var msgTemplate;
+            if (msg.username != session.username) {
+                msgTemplate = "<li>\n" +
+                    "<div class=\"user\">\n" +
+                    "<img src=\"https://www.habbo.com.br/habbo-imaging/avatarimage?&user="+msg.username+"&action=&direction=2&head_direction=3&img_format=png&gesture=&headonly=1&size=s\" alt=\"\">\n" +
+                    "</div>\n" +
+                    "<div class=\"text\">\n" +
+                    "<span class=\"autor\">"+msg.username+"</span> \n" +
+                    "<span class=\"said\">disse</span> \n" +
+                    "<span class=\"text\">"+msg.message+"</span>\n" +
+                    "</div>\n" +
+                    "</li>";
+            } else {
+                msgTemplate = "<li class=\"mine\">\n" +
+                    "<div class=\"user\">\n" +
+                    "<img src=\"https://www.habbo.com.br/habbo-imaging/avatarimage?&user="+msg.username+"&action=&direction=2&head_direction=3&img_format=png&gesture=&headonly=1&size=s\" alt=\"\">\n" +
+                    "</div>\n" +
+                    "<div class=\"text\">\n" +
+                    "<span class=\"text\">"+msg.message+"</span>\n" +
+                    "</div>\n" +
+                    "</li>";
+            }
+            msgs.append(msgTemplate);
+            msgs.scrollTop(msgs[0].scrollHeight);
+        }
         chat.off("chat").on("chat", function(data) {
             enableForm("#send_message");
-            console.log("Abrindo");
+            $("#messages").find("ul").empty();
+            $.each(data.history, function(k, msg) {
+               addMessage(msg);
+            });
+            if (localStorage.hasOwnProperty("mutedUntil")) {
+                var mutedUntil = parseInt(localStorage.getItem("mutedUntil"));
+                var date = new Date();
+                date = Math.floor(date.getTime() / 1000);
+                if (mutedUntil > date) {
+                    muted(mutedUntil);
+                    isMuted = true;
+                } else {
+                    isMuted = false;
+                    localStorage.removeItem("mutedUntil")
+                }
+            }
+            $("#send_message").off("submit").on("submit", function(e) {
+                e.preventDefault();
+                if (isMuted) return false;
+                var input = $(this).find("input[name=msg]");
+                addMessage({username: session.username, message: input.val()});
+                chat.emit("message", input.val());
+                input.val("");
+            });
+        });
+        chat.off("muted").on("muted", function(until) {
+            var date = new Date();
+            date = Math.floor(date.getTime() / 1000);
+            until = date + until;
+            muted(until);
+            localStorage.setItem("mutedUntil", until.toString());
         });
     });
 
