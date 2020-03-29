@@ -183,6 +183,11 @@ $(document).ready(function () {
         }
         function addMessage(msg) {
             var msgs = $("#messages").find("ul");
+            msg.message = msg.message.replace("<", "&#60;");
+            msg.message = msg.message.replace(">", "&#62;");
+            msg.message = msg.message.replace(/\n/g,"<br>");
+            msg.message = msg.message.replace("\"", "&#34;");
+            msg.message = msg.message.replace("'", "&#39;");
             var msgTemplate;
             if (msg.username != session.username) {
                 msgTemplate = "<li>\n" +
@@ -233,8 +238,10 @@ $(document).ready(function () {
                     e.preventDefault();
                     if (isMuted) return false;
                     var input = $(this).find("input[name=msg]");
-                    addMessage({username: session.username, message: input.val()});
-                    chat.emit("message", input.val());
+                    if (input.val().trim()) {
+                        addMessage({username: session.username, message: input.val()});
+                        chat.emit("message", input.val());
+                    }
                     input.val("");
                 });
             }
