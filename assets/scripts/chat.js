@@ -261,6 +261,42 @@ $(document).ready(function () {
             muted(until);
             localStorage.setItem("mutedUntil", until.toString());
         });
+        chat.off("online").on("online", function (online) {
+            chat.emit("onlines");
+        });
+        chat.off("offline").on("offline", function (offline) {
+            chat.emit("onlines");
+        });
+        chat.off("onlines").on("onlines", function(onlines) {
+            var number = Object.keys(onlines).length;
+            var plural = "s";
+            var icon = "on";
+            if (number == 0) {
+                icon = "off";
+            } else if (number == 1) {
+                plural = "";
+            }
+            switch (icon) {
+                case "on":
+                    $("#onlineicon").removeClass("off").addClass("on");
+                    break;
+                case "off":
+                    $("#onlineicon").removeClass("on").addClass("off");
+                    break;
+            }
+            $("[data-online=number]").html(number);
+            $("[data-online=full]").html(number+" usuário"+plural+" no chat");
+            var onlineList = $("#usersOnline").find(".row");
+            onlineList.empty();
+            $.each(onlines, function(user, online) {
+                onlineList.append("<div class=\"col-md-4\">\n" +
+                "<div class=\"user\">\n" +
+                "<img src=\"https://www.habbo.com.br/habbo-imaging/avatarimage?&user="+user+"&action=&direction=3&head_direction=3&img_format=png&gesture=sml&headonly=1&size=b\" alt=\"\">\n" +
+                "<h1>"+user+"</h1>\n" +
+                "</div>\n" +
+                "</div>");
+            });
+        });
     });
 
     chat.off("connect_error").on("connect_error", function(error) {
