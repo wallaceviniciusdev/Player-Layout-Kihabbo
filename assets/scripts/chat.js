@@ -238,9 +238,10 @@ $(document).ready(function () {
                     e.preventDefault();
                     if (isMuted) return false;
                     var input = $(this).find("input[name=msg]");
-                    if (input.val().trim()) {
-                        addMessage({username: session.username, message: input.val()});
-                        chat.emit("message", input.val());
+                    var msg = input.val().substr(0, 500);
+                    if (msg.trim()) {
+                        addMessage({username: session.username, message: msg});
+                        chat.emit("message", msg);
                     }
                     input.val("");
                 });
