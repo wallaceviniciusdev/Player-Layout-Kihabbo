@@ -185,8 +185,7 @@ $(document).ready(function () {
                     "<img src=\"https://www.habbo.com.br/habbo-imaging/avatarimage?&user="+msg.username+"&action=&direction=2&head_direction=3&img_format=png&gesture=&headonly=1&size=s\" alt=\"\">\n" +
                     "</div>\n" +
                     "<div class=\"text\">\n" +
-                    "<span class=\"autor\">"+msg.username+"</span> \n" +
-                    "<span class=\"said\">disse</span> \n" +
+                    "<div class=\"autor\">"+msg.username+"</div> \n" +
                     "<span class=\"text\">"+msg.message+"</span>\n" +
                     "</div>\n" +
                     "</li>";
