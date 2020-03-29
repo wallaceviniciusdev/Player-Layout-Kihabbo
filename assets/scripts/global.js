@@ -185,15 +185,12 @@ $(document).ready(function() {
 				$(hplayer).attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
 				hplayer.load();
 				setTimeout(function() {
-					console.log("Retomando player");
 					var playPromise = hplayer.play();
 					if (playPromise !== undefined) {
 						playPromise.then(_ => {
-							console.log("Player retomado.");
 							$("[data-player]", "body").data("player", "pause").addClass("pause");
 							isLoading = false;
 						}).catch(error => {
-							console.log("Erro ao retomar.");
 							isLoading = false;
 						});
 					}
