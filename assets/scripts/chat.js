@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+    $('[data-emoji]').click(function(){
+        let input = $('[data-message]')
+        let val = input.val()
+        input.val(val+$(this).html())
+    });
+
     function blinkOnline(){
         $("#chat .online i.on").fadeOut(300);
         $("#chat .online i.on").fadeIn(300);

@@ -342,6 +342,10 @@ body {
 	font-size: 12px;
 }
 
+#chat #inputs input.message {
+	padding-left: 40px;
+}
+
 #chat #inputs button {
 	width: 100%;
 	background-color: #e22e77;
@@ -354,6 +358,48 @@ body {
 #chat #inputs button:active {
 	background-color: white;
 	color: #e22e77;
+}
+
+#inputMessage {
+	position: relative;
+}
+
+#inputMessage .emoji {
+	position: absolute;
+	color: grey;
+	font-size: 15px;
+	top: 10px;
+	left: 15px;
+}
+
+#inputMessage .emoji i {
+	cursor: pointer;
+}
+
+#inputMessage .emoji ul.emojiList {
+	float: left;
+	width: 100%;
+	min-width: 180px !important;
+	max-width: 180px;
+	list-style: none;
+	padding: 10px 10px 0px 20px;
+}
+
+#inputMessage .emoji ul.emojiList li {
+	background-color: #EEE;
+	width: calc(25% - 10px);
+	padding: 3px 0;
+	text-align: center;
+	margin: 0 10px 10px 0;
+	border-radius:10px;
+	float: left;
+	cursor: pointer;
+}
+#inputMessage .emoji ul.emojiList li:nth-last-child(1),
+#inputMessage .emoji ul.emojiList li:nth-last-child(2),
+#inputMessage .emoji ul.emojiList li:nth-last-child(3),
+#inputMessage .emoji ul.emojiList li:nth-last-child(4) {
+	margin-bottom: 0;
 }
 
 .development {

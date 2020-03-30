@@ -89,7 +89,7 @@
 						</div>
 
 						<div id="inputs">
-								<form id="mission_check">
+								<form id="mission_check" style="display: none;">
 									<div class="row">
 										<div id="userform" class="animated col-md-12 col-md-3">
 											<input id="username" autocomplete="off" maxlength="50" type="text" placeholder="Seu nick" name="username"></div>
@@ -105,11 +105,71 @@
 										</div>
 									</div>
 								</form>
+<style>
+	#inputMessage {
+		position: relative;
+	}
 
+	#inputMessage .emoji {
+		position: absolute;
+		color: grey;
+		font-size: 15px;
+		top: 10px;
+		left: 15px;
+	}
+
+	#inputMessage .emoji i {
+		cursor: pointer;
+	}
+
+	#inputMessage .emoji ul.emojiList {
+		float: left;
+		width: 100%;
+		min-width: 180px !important;
+		max-width: 180px;
+		list-style: none;
+		padding: 10px 10px 0px 20px;
+	}
+
+	#inputMessage .emoji ul.emojiList li {
+		background-color: #EEE;
+		width: calc(25% - 10px);
+		padding: 3px 0;
+		text-align: center;
+		margin: 0 10px 10px 0;
+		border-radius:10px;
+		float: left;
+		cursor: pointer;
+	}
+	#inputMessage .emoji ul.emojiList li:nth-last-child(1),
+	#inputMessage .emoji ul.emojiList li:nth-last-child(2),
+	#inputMessage .emoji ul.emojiList li:nth-last-child(3),
+	#inputMessage .emoji ul.emojiList li:nth-last-child(4) {
+		margin-bottom: 0;
+	}
+</style>
 								<form id="send_message">
 									<div class="row">
 										<div class="col-md-10">
-											<input type="text" autocomplete="off" maxlength="500" placeholder="Sua mensagem" name="msg">
+											<div id="inputMessage">
+												<input class="message" data-message type="text" autocomplete="off" maxlength="500" placeholder="Sua mensagem" name="msg">
+												<div id="dropdown" class="emoji dropup">
+													<i class="far fa-laugh" id="emojiDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+													<div class="dropdown-menu " aria-labelledby="emojiDropDown">
+														<ul class="emojiList">
+															<li data-emoji>&#128512;</li>
+															<li data-emoji>&#128514;</li>
+															<li data-emoji>&#128525;</li>
+															<li data-emoji>&#128526;</li>
+															<li data-emoji>&#128533;</li>
+															<li data-emoji>&#128557;</li>
+															<li data-emoji>&#128545;</li>
+															<li data-emoji>&#128150;</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+									
 										</div>
 										<div class="col-md-2">
 											<button type="submit">Enviar</button>
