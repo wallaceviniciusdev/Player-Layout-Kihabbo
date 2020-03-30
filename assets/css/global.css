@@ -286,8 +286,7 @@ body {
 
 #chat #messages ul li {
 	background-color: #3d417d;
-	padding: 6px 9px;
-	padding-right: 24px;
+	padding: 6px 24px 6px 9px;
 	border-radius: 10px;
 	color: white;
 	display: flex;
@@ -303,8 +302,7 @@ body {
 	flex-direction: row-reverse;
 	text-align: right;
 	margin-right: 0;
-	padding-right: 9px;
-	padding-left: 24px;
+	padding: 6px 9px 6px 24px;
 	margin-left: auto;
 }
 
@@ -432,6 +430,14 @@ body {
 
 	#chat {
 		height: auto;
+	}
+	
+	#chat #messages ul {
+	    display: inherit;
+	}
+	
+	#chat #messages ul li {
+	    width: max-content;
 	}
 
 	#chat input, button, #mission {
