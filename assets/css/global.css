@@ -256,6 +256,10 @@ body {
 	padding-left: 0;
 }
 
+#chat #mission {
+	border-radius: 10px!important;
+}
+
 #chat #messages ul {
 	height: 280px;
 	margin: 0;
@@ -283,7 +287,7 @@ body {
 #chat #messages ul li {
 	background-color: #3d417d;
 	padding: 6px 9px;
-	padding-right: 12px;
+	padding-right: 24px;
 	border-radius: 10px;
 	color: white;
 	display: flex;
@@ -300,6 +304,7 @@ body {
 	text-align: right;
 	margin-right: 0;
 	padding-right: 9px;
+	padding-left: 24px;
 	margin-left: auto;
 }
 
@@ -408,4 +413,36 @@ body {
 
 .modal-footer button:hover, button:focus {
 	background-color: #e22e77;
+}
+
+@media only screen and (max-width: 910px) {
+	body{
+		overflow: scroll;
+	}
+
+	.content {
+		width:auto;
+		height:auto;
+		margin-top: 100px;
+	}
+
+	#left-side {
+		margin-bottom: 20px;
+	}
+
+	#chat {
+		height: auto;
+	}
+
+	#chat input, button, #mission {
+		margin-bottom: 10px;
+	}
+
+	.online {
+		margin: 20px 0;
+	}
+
+	.development {
+		margin: 30px 0;
+	}
 }
