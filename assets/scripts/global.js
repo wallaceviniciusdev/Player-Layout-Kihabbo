@@ -61,6 +61,7 @@ function divEffects(){
 	var chat_title = $("#chat .title");
 	var title_square = $("#chat #messages");
 	var develp = $(".development");
+	var interview = $("#interview");
 
 	logo.hide();
 	player.hide();
@@ -69,6 +70,8 @@ function divEffects(){
 	develp.hide();
 
 	$("#left-side").addClass(" animated bounceInDown");
+	interview.addClass("animated bounceInLeft");
+
 
 	setTimeout(
 		function(){
