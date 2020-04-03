@@ -4,6 +4,60 @@
     <link rel="shortcut icon" href="./assets/images/logo.png" />
 </head>
 <body>
-<audio id="stream" autoplay preload="auto" controls src="https://sonic.dedicado.stream:7034/;"></audio>
+<audio id="stream" autoplay preload="auto" controls src="https://cast2.hoost.com.br:20046/stream"></audio>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var isLoading = false;
+        var khplayer = document.getElementById("stream");
+        $(window).on("message", function(p) {
+            console.log("A rádio é um oferecimento do fã-site KiHabbo.me");
+            khplayer.volume = 0.4;
+            var src = $(khplayer).attr("src");
+            var playPromise = khplayer.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    var isPlaying = function () {
+                        return khplayer
+                            && khplayer.currentTime > 0
+                            && !khplayer.paused
+                            && !khplayer.ended
+                            && khplayer.readyState > 2;
+                    };
+                    setInterval(function() {
+                        var check = isPlaying();
+                        if (check !== null) {
+                            if(!isPlaying()) {
+                                if (isLoading) return false;
+                                isLoading = true;
+                                console.log("Reiniciando player KiHabbo.")
+                                $(khplayer).attr("src", src);
+                                khplayer.load();
+                                setTimeout(function() {
+                                    var playPromise = khplayer.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.then(_ => {
+                                            console.log("Player KiHabbo.me reiniciado com sucesso.")
+                                            isLoading = false;
+                                        }).catch(error => {
+                                            console.log("Erro ao reiniciar player KiHabbo.me, tentando novamente.")
+                                            isLoading = false;
+                                        });
+                                    }
+                                }, 1000);
+                            }
+                        }
+                    }, 1000);
+                    console.log("Player KiHabbo.me iniciado.");
+                    isLoading = false;
+                }).catch(error => {
+                    console.log("Erro ao iniciar player KiHabbo.");
+                    console.log(error);
+                    isLoading = false;
+                });
+            }
+        })
+    });
+</script>
 </body>
 </html>

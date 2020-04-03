@@ -3,213 +3,213 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Kihabbo - Um mundo diferente!</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="./assets/css/global.css?v=6">
+	<link rel="stylesheet" href="./assets/css/global.css?v=7">
 	<link rel="shortcut icon" href="./assets/images/logo.png" />
 	<link rel="stylesheet" type="text/css" href="./assets/icons/css/all.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 </head>
 <body>
-	<!-- Modal -->
-	<div class="modal fade" id="onlineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">
+<!-- Modal -->
+<div class="modal fade" id="onlineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">
 					<i class="fas fa-users"></i>Usuários Online (<span data-online="number">0</span>)</h5>
 
-				</div>
-				<div class="modal-body">
-					<div id="usersOnline">
-						<div class="row">
-						</div>
+			</div>
+			<div class="modal-body">
+				<div id="usersOnline">
+					<div class="row">
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 			</div>
 		</div>
 	</div>
+</div>
 <div id="hplayer"></div>
-	<div class="content">
-		<div class="container">
-			<div class="row">
-				<div class="col-md">
-					<div id="interview">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="image"></div>
-							</div>
-							<div class="col-md-8">
-								<h1>Entrevista com o <b>MC DADINHO</b></h1>
-								<p>Não perca a entrevita do Rei do Passinho do Romano só aqui na Kihabbo!</p>
-								<span class="date">Dia 04/04 às 22 horas BR / 02 horas PT</span>
-							</div>
+<div class="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md">
+				<div id="interview">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="image"></div>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div id="logo"></div>
-					<div id="left-side">
-						<div id="square">
-							<div class="title">
-								<h1>A sua quarentena está salva!</h1>
-								<p>Sejam bem-vindos à Kihabbo! O mundo diferente está de volta! </p>
-							</div>
+						<div class="col-md-8">
+							<h1>Entrevista com o <b>MC DADINHO</b></h1>
+							<p>Não perca a entrevista do Rei do Passinho do Romano só aqui na Kihabbo!</p>
+							<span class="date">Dia 04/04 às 22 horas BR / 02 horas PT</span>
 						</div>
-
-						<div id="player">
-							<div class="plataform">
-								<div class="avatar" data-status="imagem" style="background-image: url(https://www.habbo.com.br/habbo-imaging/avatarimage?&user=KiHabboVirus&action=&direction=2&head_direction=3&img_format=png&gesture=sml&headonly=0&size=l);"></div>
-							</div>
-							<div class="text">
-								<h1 data-status="dj">...</h1>
-								<h2><span>com</span> <span data-status="programa">...</span></h2>
-								<div class="buttons">
-									<button data-player="play" data-ip="sonic.dedicado.stream:7034" data-shoutcast="1" data-security="1" class="play"></button>
-									<button class="listeners"><i class="fas fa-users"></i> <span data-status="ouvintes">...</span></button>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="col-md-8">
-					<div class="overlay" style="display:none;">
-						<h1 id="statusmsg" style="font-size: 19px !important;"></h1>
-					</div>
-					<div id="chat">
-						<div class="row">
-							<div class="col-md-8">
-								<div class="title">
-									<h1>Chat dos Usuários</h1>
-									<p>Que tal bater um papo enquanto você ouve a rádio?</p>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="online" data-toggle="modal" data-target="#onlineModal">
-									<i id="onlineicon" class="fas fa-circle off"></i> <span data-online="full">0 usuários no chat</span>
-								</div>
-							</div>
-						</div>
-
-						<div id="messages">
-							<ul>
-							</ul>
-						</div>
-
-						<div id="inputs">
-								<form id="mission_check" style="display: none;">
-									<div class="row">
-										<div id="userform" class="animated col-md-12 col-md-3">
-											<input id="username" autocomplete="off" maxlength="50" type="text" placeholder="Seu nick" name="username"></div>
-										<div id="missionform" class="col-md-9">
-											<div class="row">
-												<div class="col-md-8">
-													<div id="mission" style="width: 100%;height: 40px;background:#fff;color: #131646;border: none;outline: none;padding: 10px 20px;border-radius: 20px;font-size: 12px;"></div>
-												</div>
-												<div class="col-md-4">
-													<button id="check">Confirmar</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</form>
-<style>
-	#inputMessage {
-		position: relative;
-	}
-
-	#inputMessage .emoji {
-		position: absolute;
-		color: grey;
-		font-size: 15px;
-		top: 10px;
-		left: 15px;
-	}
-
-	#inputMessage .emoji i {
-		cursor: pointer;
-	}
-
-	#inputMessage .emoji ul.emojiList {
-		float: left;
-		width: 100%;
-		min-width: 180px !important;
-		max-width: 180px;
-		list-style: none;
-		padding: 10px 10px 0px 20px;
-	}
-
-	#inputMessage .emoji ul.emojiList li {
-		background-color: #EEE;
-		width: calc(25% - 10px);
-		padding: 3px 0;
-		text-align: center;
-		margin: 0 10px 10px 0;
-		border-radius:10px;
-		float: left;
-		cursor: pointer;
-	}
-	#inputMessage .emoji ul.emojiList li:nth-last-child(1),
-	#inputMessage .emoji ul.emojiList li:nth-last-child(2),
-	#inputMessage .emoji ul.emojiList li:nth-last-child(3),
-	#inputMessage .emoji ul.emojiList li:nth-last-child(4) {
-		margin-bottom: 0;
-	}
-</style>
-								<form id="send_message">
-									<div class="row">
-										<div class="col-md-10">
-											<div id="inputMessage">
-												<input class="message" data-message type="text" autocomplete="off" maxlength="500" placeholder="Sua mensagem" name="msg">
-												<div id="dropdown" class="emoji dropup">
-													<i class="far fa-laugh" id="emojiDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-													<div class="dropdown-menu " aria-labelledby="emojiDropDown">
-														<ul class="emojiList">
-															<li data-emoji>&#128512;</li>
-															<li data-emoji>&#128514;</li>
-															<li data-emoji>&#128525;</li>
-															<li data-emoji>&#128526;</li>
-															<li data-emoji>&#128533;</li>
-															<li data-emoji>&#128557;</li>
-															<li data-emoji>&#128545;</li>
-															<li data-emoji>&#128150;</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-									
-										</div>
-										<div class="col-md-2">
-											<button type="submit">Enviar</button>
-										</div>
-									</div>
-								</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md">
-					<div class="development">
-						Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5581999347247&text=Ol%C3%A1!%20Estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20manuten%C3%A7%C3%A3o%20da%20Kihabbo." target="_blank"><b>Wallace Vinicius</b></a> e <a href="https://api.mateusmelo.com" target="_blank"><b>Mateus Melo</b></a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div id="logo"></div>
+				<div id="left-side">
+					<div id="square">
+						<div class="title">
+							<h1>A sua quarentena está salva!</h1>
+							<p>Sejam bem-vindos à Kihabbo! O mundo diferente está de volta! </p>
+						</div>
+					</div>
+
+					<div id="player">
+						<div class="plataform">
+							<div class="avatar" data-status="imagem" style="background-image: url(https://www.habbo.com.br/habbo-imaging/avatarimage?&user=KiHabboVirus&action=&direction=2&head_direction=3&img_format=png&gesture=sml&headonly=0&size=l);"></div>
+						</div>
+						<div class="text">
+							<h1 data-status="dj">...</h1>
+							<h2><span>com</span> <span data-status="programa">...</span></h2>
+							<div class="buttons">
+								<button data-player="play" data-ip="cast2.hoost.com.br:20046" data-shoutcast="icecast" data-security="1" class="play"></button>
+								<button class="listeners"><i class="fas fa-users"></i> <span data-status="ouvintes">...</span></button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-8">
+				<div class="overlay" style="display:none;">
+					<h1 id="statusmsg" style="font-size: 19px !important;"></h1>
+				</div>
+				<div id="chat">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="title">
+								<h1>Chat dos Usuários</h1>
+								<p>Que tal bater um papo enquanto você ouve a rádio?</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="online" data-toggle="modal" data-target="#onlineModal">
+								<i id="onlineicon" class="fas fa-circle off"></i> <span data-online="full">0 usuários no chat</span>
+							</div>
+						</div>
+					</div>
+
+					<div id="messages">
+						<ul>
+						</ul>
+					</div>
+
+					<div id="inputs">
+						<form id="mission_check" style="display: none;">
+							<div class="row">
+								<div id="userform" class="animated col-md-12 col-md-3">
+									<input id="username" autocomplete="off" maxlength="50" type="text" placeholder="Seu nick" name="username"></div>
+								<div id="missionform" class="col-md-9">
+									<div class="row">
+										<div class="col-md-8">
+											<div id="mission" style="width: 100%;height: 40px;background:#fff;color: #131646;border: none;outline: none;padding: 10px 20px;border-radius: 20px;font-size: 12px;"></div>
+										</div>
+										<div class="col-md-4">
+											<button id="check">Confirmar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<style>
+							#inputMessage {
+								position: relative;
+							}
+
+							#inputMessage .emoji {
+								position: absolute;
+								color: grey;
+								font-size: 15px;
+								top: 10px;
+								left: 15px;
+							}
+
+							#inputMessage .emoji i {
+								cursor: pointer;
+							}
+
+							#inputMessage .emoji ul.emojiList {
+								float: left;
+								width: 100%;
+								min-width: 180px !important;
+								max-width: 180px;
+								list-style: none;
+								padding: 10px 10px 0px 20px;
+							}
+
+							#inputMessage .emoji ul.emojiList li {
+								background-color: #EEE;
+								width: calc(25% - 10px);
+								padding: 3px 0;
+								text-align: center;
+								margin: 0 10px 10px 0;
+								border-radius:10px;
+								float: left;
+								cursor: pointer;
+							}
+							#inputMessage .emoji ul.emojiList li:nth-last-child(1),
+							#inputMessage .emoji ul.emojiList li:nth-last-child(2),
+							#inputMessage .emoji ul.emojiList li:nth-last-child(3),
+							#inputMessage .emoji ul.emojiList li:nth-last-child(4) {
+								margin-bottom: 0;
+							}
+						</style>
+						<form id="send_message">
+							<div class="row">
+								<div class="col-md-10">
+									<div id="inputMessage">
+										<input class="message" data-message type="text" autocomplete="off" maxlength="500" placeholder="Sua mensagem" name="msg">
+										<div id="dropdown" class="emoji dropup">
+											<i class="far fa-laugh" id="emojiDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+											<div class="dropdown-menu " aria-labelledby="emojiDropDown">
+												<ul class="emojiList">
+													<li data-emoji>&#128512;</li>
+													<li data-emoji>&#128514;</li>
+													<li data-emoji>&#128525;</li>
+													<li data-emoji>&#128526;</li>
+													<li data-emoji>&#128533;</li>
+													<li data-emoji>&#128557;</li>
+													<li data-emoji>&#128545;</li>
+													<li data-emoji>&#128150;</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="col-md-2">
+									<button type="submit">Enviar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md">
+				<div class="development">
+					Desenvolvido por <a href="https://api.whatsapp.com/send?phone=5581999347247&text=Ol%C3%A1!%20Estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20manuten%C3%A7%C3%A3o%20da%20Kihabbo." target="_blank"><b>Wallace Vinicius</b></a> e <a href="https://api.mateusmelo.com" target="_blank"><b>Mateus Melo</b></a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="assets/scripts/global.js?v=2"></script>
-	<script type="text/javascript" src="assets/scripts/chat.js?v=6"></script>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="assets/scripts/global.js?v=6"></script>
+<script type="text/javascript" src="assets/scripts/chat.js?v=6"></script>
 </body>
 </html>

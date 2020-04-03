@@ -1,52 +1,3 @@
-// function missionCheck(){
-// 	var formMission = $("#misson_check"),
-// 		formMessage = $("#send_message");
-//
-// 	formMessage.hide();
-//
-// 	formMission.submit(function(event){
-// 		var request = $.ajax({
-// 			method: "GET",
-// 			url: "missionCheckScript",
-// 			data: {}
-// 		});
-//
-// 		request.done(function(msg){
-// 			$(this).addClass("animated bounceOutUp");
-// 			$(this).fadeOut(300);
-// 			formMessage.fadeIn(300);
-// 			formMessage.addClass("animated bounceInUp");
-// 		});
-//
-// 		request.fail(function(msg){
-// 			$(this).addClass("animated shake");
-// 		})
-//
-// 		event.preventDefault();
-// 	});
-// }
-//
-// function sendMessage(){
-// 	var formMessage = $("#send_message");
-//
-// 	formMessage.submit(function(event){
-// 		var request = $.ajax({
-// 			method: "POST",
-// 			url: "sendMessageScript",
-// 			data: {}
-// 		});
-//
-// 		request.done(function(msg){
-// 		});
-//
-// 		request.fail(function(msg){
-// 			$(this).addClass("animated shake");
-// 		})
-//
-// 		event.preventDefault();
-// 	});
-// }
-
 function loadUtils(type, extradata) {
 	return $.ajax({
 		url: "https://api.mateusmelo.com/" + type,
@@ -71,7 +22,6 @@ function divEffects(){
 
 	$("#left-side").addClass(" animated bounceInDown");
 	interview.addClass("animated bounceInLeft");
-
 
 	setTimeout(
 		function(){
@@ -106,8 +56,6 @@ function divEffects(){
 
 $(document).ready(function() {
 	var clickedFirst = 0;
-	//missionCheck();
-	//sendMessage();
 	divEffects();
 	var isLoading = false;
 	var player = {
@@ -132,7 +80,7 @@ $(document).ready(function() {
 			audio.attr("id", "haudio");
 			var https = "http";
 			if ($("[data-player]").data("security") == 1) https = "https";
-			audio.attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
+			audio.attr("src", https + "://" + $("[data-player]").data("ip") + "/stream");
 			audio.attr("type", "audio/mp3");
 			$("#hplayer", "body").html(audio);
 			var hplayer = document.getElementById("haudio");
@@ -185,7 +133,7 @@ $(document).ready(function() {
 				var hplayer = document.getElementById("haudio");
 				var https = "http";
 				if ($("[data-player]").data("security") == 1) https = "https";
-				$(hplayer).attr("src", https + "://" + $("[data-player]").data("ip") + "/;stream.aacp");
+				$(hplayer).attr("src", https + "://" + $("[data-player]").data("ip") + "/stream");
 				hplayer.load();
 				setTimeout(function() {
 					var playPromise = hplayer.play();
